@@ -1,0 +1,118 @@
+import java.awt.*;
+import javax.swing.*;
+
+public abstract class Core {
+	
+	private static DisplayMode modes[] = {
+			
+			new DisplayMode(3840, 2160, 32,0),
+			new DisplayMode(3840, 2160, 24,0),
+			new DisplayMode(3840, 2160, 16,0),
+			new DisplayMode(1920, 1080, 32,0),
+			new DisplayMode(1920, 1080, 24,0),
+			new DisplayMode(1920, 1080, 16,0)
+					
+	};
+	
+	private boolean running;
+	protected ScreenManager s;
+	
+	//stop method
+	public void stop() {
+		
+		running = false;
+	}
+
+	public void run () {
+		try {
+			
+			init();
+			gameLoop();
+			
+		}finally {
+			
+			s.restoreScreen();
+		}
+	}
+	
+	public void init() {
+		
+		s = new ScreenManager();
+		DisplayMode dm = s.findFirstCompatibleMode(modes);
+		s.setFullScreen(dm);
+		
+		Window w = s.getFullScreenWindow();
+		w.setFont(new Font("Arial", Font.PLAIN, 40));
+		w.setBackground(Color.CYAN);
+		w.setForeground(Color.black);
+		running = true;
+		
+	}
+	
+	// main game loop
+	
+	public void gameLoop() {
+		
+		long startTime = System.currentTimeMillis();
+		long cumTime = startTime;
+		
+		while(running) {
+			
+			long timePassed = System.currentTimeMillis() - cumTime;
+			cumTime += timePassed;
+			
+			update(timePassed);
+			
+			
+			Graphics2D g = s.getGraphics();
+			draw(g);
+			s.update();
+			
+			try {
+				
+				Thread.sleep(20);
+				
+			}catch(Exception e) {}
+		}
+		
+	}
+	
+	
+	// update animation
+	
+	public void update(long timePassed) {
+	}
+	
+	// draw
+	
+	public abstract void draw(Graphics2D g) ;
+		
+		
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
