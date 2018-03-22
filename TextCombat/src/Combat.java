@@ -16,7 +16,6 @@ public class Combat {
 	private double amp = 1;
 	
 	
-	
 
 	Scanner scanner = new Scanner(System.in);
 
