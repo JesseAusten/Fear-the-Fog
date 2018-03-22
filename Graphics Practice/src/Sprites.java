@@ -53,8 +53,12 @@ public class Sprites {
 	// get sprite width
 
 	public int getWidth() {
+		
+		
 
 		return a.getImage().getWidth(null);
+		
+		
 	}
 
 	// get sprite height
