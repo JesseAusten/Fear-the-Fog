@@ -8,6 +8,7 @@ public class Player {
 	private Tile[] tileSet;
 	private Weapon currentWep;
 	private boolean isAlive;
+	private String name;
 	
 
 	public Player(int row, int col) {
@@ -45,6 +46,10 @@ public class Player {
 
 		return this.velocity;
 	}
+	
+	public String getName() {
+		return name;
+	}
 
 	public void setRow(int row) {
 
@@ -59,6 +64,10 @@ public class Player {
 	public void setVelocity(int velocity) {
 
 		this.velocity = velocity;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
