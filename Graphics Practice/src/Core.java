@@ -62,8 +62,6 @@ public abstract class Core {
 			cumTime += timePassed;
 			
 			update(timePassed);
-			
-			
 			Graphics2D g = s.getGraphics();
 			draw(g);
 			s.update();
@@ -85,6 +83,8 @@ public abstract class Core {
 	
 	// draw
 	
+	
+
 	public abstract void draw(Graphics2D g) ;
 		
 		
