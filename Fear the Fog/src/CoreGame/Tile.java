@@ -5,7 +5,10 @@ public class Tile {
 	boolean passable;
 	boolean destructable;
 	
-	public Tile() {}
+	public Tile() {
+		
+		System.out.println();
+	}
 	
 	
 }
