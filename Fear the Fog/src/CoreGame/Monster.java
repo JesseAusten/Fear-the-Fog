@@ -31,4 +31,5 @@ public class Monster {
 		// TODO Auto-generated method stub
 
 	}
+	
 }
