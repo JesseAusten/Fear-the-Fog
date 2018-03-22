@@ -11,8 +11,8 @@ public class RunTime2 extends JFrame {
 	public static void main(String[] args) {
 
 		DisplayMode dm = new DisplayMode(1920, 1080, 32, DisplayMode.REFRESH_RATE_UNKNOWN);
-		Runtime b = new Runtime();
-		b.run(dm);
+		RunTime2 b = new RunTime2();
+		b.run();
 
 	}
 
@@ -79,7 +79,7 @@ public class RunTime2 extends JFrame {
 			long timePassed = System.currentTimeMillis() - cumTime;
 			cumTime += timePassed;
 			update(timePassed);
-			Graphics2D g = (Graphics2D)screen.getFullScreenWindow().getGraphics();
+			Graphics2D g = screen.getGraphics();
 			draw(g);
 			g.dispose();
 			screen.update();

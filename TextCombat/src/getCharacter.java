@@ -19,7 +19,7 @@ public class getCharacter {
 	Statement charState = null;
 	Scanner scanner = new Scanner(System.in);
 
-	public getCharacter() { // retrieve chracter saves
+	public getCharacter() { // retrieve character saves
 
 		try {
 

@@ -18,6 +18,8 @@ public class Keyboard extends Core implements KeyListener {
 	private Image bg;
 	private Animation a;
 	private Sprites sprite;
+	private Sprites enemy;
+	private Animation b;
 
 	// init also init from superclass
 
@@ -31,10 +33,16 @@ public class Keyboard extends Core implements KeyListener {
 
 		bg = new ImageIcon("E:\\Pictures\\batman.jpg").getImage().getScaledInstance(3840, 2160, 0);
 		Image banner1 = new ImageIcon("E:\\Pictures\\logo.png").getImage();
+		Image enemySprite = new ImageIcon("E:\\Pictures\\wowsexy.png").getImage();
 		a = new Animation();
+		b = new Animation();
+		
+		b.addScene(enemySprite, 250);
+		b.addScene(enemySprite, 250);
 
 		a.addScene(banner1, 250);
 		a.addScene(banner1, 250);
+		enemy = new Sprites(b);
 		sprite = new Sprites(a);
 
 	}
@@ -129,11 +137,12 @@ public class Keyboard extends Core implements KeyListener {
 		g.drawImage(bg, 0, 0, null);
 		
 		g.drawImage(sprite.getImage(), Math.round(sprite.getX()), Math.round(sprite.getY()), null);
+		g.drawImage(enemy.getImage(), Math.round(enemy.getX()), Math.round(enemy.getY()), null);
 	}
 
 	public void update(long timePassed) {
 
-		 if (sprite.getX() < 0) {
+		 if (sprite.getX() < 0) { //set playable bounds
 		
 		 sprite.setVelocityX(0);
 		 sprite.setX(1);
@@ -157,9 +166,41 @@ public class Keyboard extends Core implements KeyListener {
 		 sprite.setY((s.getHeight() - 1) - sprite.getHeight());
 		
 		 }
+		 
+		 
+		 // enemy sprite
+		 
+		 enemy.setX(1000);
+		 enemy.setY(1000);
+		 
+		 if(sprite.getX() < enemy.getX()+ enemy.getWidth() && sprite.getX() + sprite.getWidth() > enemy.getX() && inBetween(sprite.getY(), sprite.getY() + sprite.getHeight(), enemy.getY() + enemy.getHeight() , enemy.getY())) {
+			 System.out.println("Collision!");
+			 sprite.setVelocityX(0);
+			 sprite.setX(sprite.getX() + 1);
+			
+		 }
+		 if( sprite.getX() +sprite.getWidth() > enemy.getX()   && inBetween(sprite.getY(), sprite.getY() + sprite.getHeight(), enemy.getY() + enemy.getHeight() , enemy.getY())) {
+			 
+			 sprite.setVelocityX(0);
+			 sprite.setX(sprite.getX() - 1);
+			 
+			 
+			 
+			 
+		 }
 
 		sprite.update(timePassed);
 
+	}
+	
+	
+	public boolean inBetween(float top, float bottom, float high, float low) {
+		
+		if(top < high && bottom > low ) {
+			
+			return true;
+			
+		}else { return false;}
 	}
 
 }

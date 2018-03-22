@@ -5,6 +5,7 @@ public class mage extends spell {
 	private int a = 0; // arcane -damage
 	private int y; // counter var for hail storm
 	private int z; // sum var for hail storm
+	private int gg;
 
 	public mage() {
 
