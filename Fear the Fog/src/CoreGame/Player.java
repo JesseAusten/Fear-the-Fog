@@ -8,23 +8,25 @@ public class Player {
 	private Tile[] tileSet;
 	private Weapon currentWep;
 	private boolean isAlive;
-	private int[] rowShape;
-	private int[] columnShape;
+	
 
 	public Player(int row, int col) {
+		
+		PatternIO loadPattern = new PatternIO();
+		int[][] pattern = loadPattern.loadPattern("Player");
 
 		this.row = row;
 		this.col = col;
 		this.isAlive = true;
 		this.velocity = 2;
 
-		tileSet = new Tile[columnShape.length];
+		tileSet = new Tile[pattern[0].length];
 		tileSet[0] = new Tile(true, true, true, row, col);
 
 		for (int i = 0; i < (tileSet.length - 1); i++) {
 
-			tileSet[i + 1] = new Tile(true, true, false, columnShape[i], rowShape[i]);
-
+			tileSet[i + 1] = new Tile(true, true, false, pattern[0][i], pattern[1][i]);
+			
 		}
 
 	}
