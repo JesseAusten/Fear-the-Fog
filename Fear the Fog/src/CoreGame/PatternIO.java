@@ -44,7 +44,7 @@ public class PatternIO {
 				e.printStackTrace();
 			}
 
-		} else { // if the file does not exist, creates json file and writes an empty JSON array
+		} else { // if the file does not exist, creates json file and writes an empty JSON object
 					// to it
 
 			patternFile = new JSONObject();
@@ -93,7 +93,7 @@ public class PatternIO {
 		patternFile.put(patternName, savePattern);
 
 	}
-	
+
 	/*
 	 * Load pattern from file as a 2d array of integers
 	 */
@@ -108,18 +108,16 @@ public class PatternIO {
 		int index = 0;
 
 		for (Object i : col) {
-
 			
-			int columnValue = (int) i;
+			int columnValue = Integer.parseInt(i.toString());
 			returnValues[0][index++] = columnValue;
 		}
-		
-		index = 0;
-		
-		for (Object i : row) {
 
+		index = 0;
+
+		for (Object i : row) {
 			
-			int rowValue = (int) i;
+			int rowValue = Integer.parseInt(i.toString());
 			returnValues[1][index++] = rowValue;
 
 		}
@@ -152,23 +150,21 @@ public class PatternIO {
 		int[] testCol = { 1, 2, 3, 4, 5, 6, 7 };
 		int[] testRow = { 7, 3, 2, 1, 4, 5, 5 }; // testing only
 		String name = "Player";
-
+		
+		
 		PatternIO test = new PatternIO();
 		test.savePattern(testCol, testRow, name);
 		test.writeToFile();
-		
+
 		int[][] temp = test.loadPattern("Player");
-		
-		for(int i = 0; i < temp.length; i++) { //MOOR TESTING
-			
-			for(int j = 0; j < temp[i].length; j++) {
-				
+
+		for (int i = 0; i < temp.length; i++) { // MOOR TESTING
+			for (int j = 0; j < temp[i].length; j++) {
 				System.out.println(temp[i][j]);
 				
+
 			}
-			
-			
-			
+
 		}
 
 	}

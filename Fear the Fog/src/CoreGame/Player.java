@@ -30,6 +30,7 @@ public class Player {
 		}
 
 	}
+	
 
 	public int getRow() {
 
@@ -45,6 +46,11 @@ public class Player {
 
 		return this.velocity;
 	}
+	
+	public boolean getIsAlive() {
+		
+		return this.isAlive;
+	}
 
 	public void setRow(int row) {
 
@@ -59,6 +65,11 @@ public class Player {
 	public void setVelocity(int velocity) {
 
 		this.velocity = velocity;
+	}
+	
+	public void setIsAlive(boolean isAlive) {
+		
+		this.isAlive = isAlive;
 	}
 
 }
