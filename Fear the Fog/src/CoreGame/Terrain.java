@@ -1,5 +1,5 @@
 package CoreGame;
 
-public class TestClass {
+public class Terrain {
 
 }
