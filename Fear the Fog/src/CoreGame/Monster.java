@@ -4,7 +4,7 @@ public class Monster {
 	public Monster() {
 		
 		
-		
+		System.out.println();
 	}
 
 }
