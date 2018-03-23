@@ -32,6 +32,12 @@ public class Player {
 
 	}
 	
+	public static void main(String[] args) {
+		
+		Player test = new Player(0,0);
+		
+	}
+	
 
 	public int getRow() {	
 

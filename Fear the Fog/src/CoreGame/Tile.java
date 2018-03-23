@@ -4,17 +4,19 @@ public class Tile {
 
 	private boolean passable;
 	private boolean destructable;
-	private boolean isAlive;
+	private boolean drawable;
+	private boolean coreTile;
 	private int row;
 	private int col;
 
-	public Tile(boolean passable, boolean destructable, boolean isAlive, int row, int col) {
+	public Tile(boolean passable, boolean destructable, boolean drawable, boolean coreTile, int row, int col) {
 
 		this.passable = passable;
 		this.destructable = destructable;
-		this.isAlive = isAlive;
+		this.drawable = drawable;
 		this.row = row;
 		this.col = col;
+		this.coreTile = coreTile;
 
 	}
 
@@ -30,9 +32,9 @@ public class Tile {
 
 	}
 
-	public boolean getIsAlive() {
+	public boolean getDrawable() {
 
-		return isAlive;
+		return drawable;
 
 	}
 	
@@ -56,9 +58,9 @@ public class Tile {
 
 	}
 	
-	public void setIsAlive(boolean isAlive) {
+	public void setDrawable(boolean drawable) {
 		
-		this.isAlive = isAlive;
+		this.drawable = drawable;
 	
 	}
 	
@@ -69,7 +71,7 @@ public class Tile {
 	
 	public void setColumn(int column) {
 		
-		this.col = col;
+		this.col = column;
 		
 	}
 

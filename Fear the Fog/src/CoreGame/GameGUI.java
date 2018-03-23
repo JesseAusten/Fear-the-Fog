@@ -59,6 +59,7 @@ public class GameGUI{
 		
 		
 		
+		
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;	
 		c.gridx = 0;						
@@ -66,7 +67,7 @@ public class GameGUI{
 		c.gridwidth = 5;
 		c.weightx = .8;
 		c.weighty = .8;
-		mainPanel.add(buttonPanel, c);
+		mainPanel.add(buttonPanel, c); 
 	
 		c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;	

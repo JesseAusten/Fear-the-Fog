@@ -109,7 +109,8 @@ public class PatternIO {
 
 		for (Object i : col) {
 			
-			int columnValue = Integer.parseInt(i.toString());
+			Number temp = (Number) i;
+			int columnValue = temp.intValue();
 			returnValues[0][index++] = columnValue;
 		}
 
@@ -117,7 +118,8 @@ public class PatternIO {
 
 		for (Object i : row) {
 			
-			int rowValue = Integer.parseInt(i.toString());
+			Number temp = (Number) i;
+			int rowValue = temp.intValue();
 			returnValues[1][index++] = rowValue;
 
 		}
@@ -147,11 +149,10 @@ public class PatternIO {
 
 	public static void main(String[] args) { // for testing
 
-		int[] testCol = { 1, 2, 3, 4, 5, 6, 7 };
-		int[] testRow = { 7, 3, 2, 1, 4, 5, 5 }; // testing only
-		String name = "Player";
-		
-		
+		int[] testCol = { -1, -2, 0, 0, 1, 2, 0, 0 };
+		int[] testRow = { 0, 0, -1, -2, 0, 0, 1, 2 }; // testing only
+		String name = "Test";
+
 		PatternIO test = new PatternIO();
 		test.savePattern(testCol, testRow, name);
 		test.writeToFile();
@@ -161,12 +162,7 @@ public class PatternIO {
 		for (int i = 0; i < temp.length; i++) { // MOOR TESTING
 			for (int j = 0; j < temp[i].length; j++) {
 				System.out.println(temp[i][j]);
-				
-
 			}
-
 		}
-
 	}
-
 }
