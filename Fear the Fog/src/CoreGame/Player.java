@@ -33,7 +33,7 @@ public class Player {
 	}
 	
 
-	public int getRow() {
+	public int getRow() {	
 
 		return this.row;
 	}
@@ -80,6 +80,7 @@ public class Player {
 		
 		this.isAlive = isAlive;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 
