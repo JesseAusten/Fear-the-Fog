@@ -117,17 +117,6 @@ public class GameGUI{
 	
 	public static void main(String[] args) {
 		GameGUI gameGUI = new GameGUI();
-		while (true) {
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println(mainPanel.getSize().toString());
-			System.out.println(p2.getSize().toString());
-			System.out.println(p3.getSize().toString());
-			System.out.println(p4.getSize().toString());
-		}
+		
 	}
 }
