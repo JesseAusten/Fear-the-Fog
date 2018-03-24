@@ -6,16 +6,18 @@ public class Tile {
 	private boolean destructable;
 	private boolean drawable;
 	private boolean coreTile;
+	private int offSetRow;
+	private int offSetCol;
 	private int row;
 	private int col;
 
-	public Tile(boolean passable, boolean destructable, boolean drawable, boolean coreTile, int row, int col) {
+	public Tile(boolean passable, boolean destructable, boolean drawable, boolean coreTile, int offSetRow, int offSetCol) {
 
 		this.passable = passable;
 		this.destructable = destructable;
 		this.drawable = drawable;
-		this.row = row;
-		this.col = col;
+		this.offSetRow = offSetRow;
+		this.offSetCol = offSetCol;
 		this.coreTile = coreTile;
 
 	}
@@ -71,12 +73,12 @@ public class Tile {
 
 	public void setRow(int row) {
 
-		this.row = row;
+		this.row = row + this.offSetRow;
 	}
 
 	public void setColumn(int column) {
 
-		this.col = column;
+		this.col = column + this.offSetCol;
 
 	}
 
