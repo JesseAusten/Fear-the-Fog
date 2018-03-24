@@ -10,6 +10,10 @@ public class Animation {
 	private long movieTime;
 	private long totalTime;
 
+	/**
+	 * Constructor initiazes ArrayList Scenes and int totalTime
+	 * Then calls the run method to start the animation
+	 */
 	public Animation() {
 
 		scenes = new ArrayList();
@@ -18,7 +22,11 @@ public class Animation {
 
 	}
 
-	// add scene to arrayList and set time for each scene
+	/**
+	 * Adds a scene to the animation
+	 * @param i -an image to add to the scene
+	 * @param t -frame time for the added scene
+	 */
 	public synchronized void addScene(Image i, long t) {
 
 		totalTime += t;
@@ -26,7 +34,9 @@ public class Animation {
 
 	}
 
-	// start animation from beginning
+	/**
+	 * Starts the animation
+	 */
 
 	public synchronized void start() {
 
@@ -35,7 +45,10 @@ public class Animation {
 
 	}
 
-	// change scene
+	/**
+	 * Updates the animation based on the time passed
+	 * @param timePassed -the amount of time passed
+	 */
 
 	public synchronized void update(long timePassed) {
 
@@ -53,7 +66,10 @@ public class Animation {
 		}
 	}
 
-	// get animations current scene
+	/**
+	 * Returns the image at the current scene index
+	 * @return an image from the current animation
+	 */
 
 	public synchronized Image getImage() {
 
@@ -67,7 +83,11 @@ public class Animation {
 
 	}
 
-	// get scene
+	/**
+	 * Returns the  scene based on the index (image and frame-time)
+	 * @param x the scene index
+	 * @return the scene at index x
+	 */
 
 	private OneScene getScene(int x) {
 		return (OneScene) scenes.get(x);
