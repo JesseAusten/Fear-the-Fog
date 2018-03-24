@@ -162,14 +162,10 @@ public class GameGUI implements ActionListener, MouseListener {
 		String[] commands = cell.split(" ");		// Get the command for the button "row col"
 		int row = Integer.parseInt(commands[0]);
 		int col = Integer.parseInt(commands[1]);
-		if (board.getCell(row, col) == 1) {				
-			setColor(row, col, Color.WHITE);		
-			board.setCell(row, col, 0);			
-		}
-		else {										
-			setColor(row, col, Color.BLACK);		
-			board.setCell(row, col, 1);
-		}
+		if (board.getCell(row, col) == 1)			
+			setCell(cell, 0);		
+		else
+			setCell(cell, 1);
 	}
 		
 	// Sets the cell to be a given mode.
