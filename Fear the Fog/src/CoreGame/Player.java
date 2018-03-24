@@ -10,6 +10,7 @@ public class Player {
 	private boolean isAlive;
 	private String name;
 	
+	
 
 	public Player(int row, int col) {
 		
@@ -22,11 +23,11 @@ public class Player {
 		this.velocity = 2;
 
 		tileSet = new Tile[pattern[0].length];
-		tileSet[0] = new Tile(true, true, true, row, col);
+		tileSet[0] = new Tile(true, true, true, true, row, col);
 
 		for (int i = 0; i < (tileSet.length - 1); i++) {
 
-			tileSet[i + 1] = new Tile(true, true, false, pattern[0][i], pattern[1][i]);
+			tileSet[i + 1] = new Tile(true, true, true, false, pattern[0][i], pattern[1][i]);
 			
 		}
 

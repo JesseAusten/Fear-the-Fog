@@ -26,6 +26,11 @@ public class Tile {
 
 	}
 
+	public boolean getCoretile() {
+
+		return this.coreTile;
+	}
+
 	public boolean getDestructable() {
 
 		return destructable;
@@ -37,11 +42,11 @@ public class Tile {
 		return drawable;
 
 	}
-	
+
 	public int getRow() {
 		return row;
 	}
-	
+
 	public int getCol() {
 		return col;
 	}
@@ -57,22 +62,28 @@ public class Tile {
 		this.destructable = destructable;
 
 	}
-	
+
 	public void setDrawable(boolean drawable) {
-		
+
 		this.drawable = drawable;
-	
+
 	}
-	
+
 	public void setRow(int row) {
-		
+
 		this.row = row;
 	}
-	
+
 	public void setColumn(int column) {
-		
+
 		this.col = column;
-		
+
+	}
+
+	public void setCoreTile(boolean coreTile) {
+
+		this.coreTile = coreTile;
+
 	}
 
 }
