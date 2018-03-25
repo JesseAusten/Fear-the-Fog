@@ -40,11 +40,19 @@ public class GameGUI implements ActionListener, MouseListener {
 	private JButton reset;
 	private JButton small;
 	private JButton large;
+	private JButton wall;
+	private JButton player;
+	private JButton monster;
 	
 	private Board board;
+	private String currentButton = "";
 	private boolean isMouseDown;
 	private boolean isSmall = true;
 	private boolean isLarge = false;
+	
+	private boolean isWall = false;
+	private boolean isPlayer = false;
+	private boolean isMonster = false;
 	
 	public GameGUI(Board board, int pixelLength, int pixelHeight) {
 		
@@ -110,7 +118,7 @@ public class GameGUI implements ActionListener, MouseListener {
 		c.gridwidth = 2;
 		c.weightx = .2;
 		p2 = new JPanel();
-		p2.setLayout(new BoxLayout(p2, BoxLayout.PAGE_AXIS));
+		p2.setLayout(new BoxLayout(p2, BoxLayout.Y_AXIS));
 		// Setup buttons for right panel
 		reset = new JButton("Reset");
 		reset.setActionCommand("reset");
@@ -121,11 +129,23 @@ public class GameGUI implements ActionListener, MouseListener {
 		large = new JButton("Large Brush");
 		large.setActionCommand("large");
 		large.addActionListener(this);
+		wall = new JButton("Wall");
+		wall.setActionCommand("wall");
+		wall.addActionListener(this);
+		player = new JButton("Player");
+		player.setActionCommand("player");
+		player.addActionListener(this);
+		monster = new JButton("Monster");
+		monster.setActionCommand("monster");
+		monster.addActionListener(this);
 		//p2.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
 		p2.setPreferredSize(new Dimension(171, 661));
 		p2.add(reset);
 		p2.add(small);
 		p2.add(large);
+		p2.add(wall);
+		p2.add(player);
+		p2.add(monster);
 		mainPanel.add(p2, c);
 	
 		c = new GridBagConstraints();
@@ -156,62 +176,98 @@ public class GameGUI implements ActionListener, MouseListener {
 	public void setColor(int row, int col, Color color) {
 		buttons[row][col].setBackground(color);
 	}
-	
-	// Sets the cell to swap from black<->white.
+		
+	// Sets the cell to be a given mode.
 	private void setCell(String cell) {
 		String[] commands = cell.split(" ");		// Get the command for the button "row col"
 		int row = Integer.parseInt(commands[0]);
 		int col = Integer.parseInt(commands[1]);
-		if (board.getCell(row, col) == 1)			
-			setCell(cell, 0);		
-		else
-			setCell(cell, 1);
-	}
 		
-	// Sets the cell to be a given mode.
-	private void setCell(String cell, int mode) {
-		String[] commands = cell.split(" ");		// Get the command for the button "row col"
-		int row = Integer.parseInt(commands[0]);
-		int col = Integer.parseInt(commands[1]);
-		
-		if (isSmall) {
-			if (mode == 0)								// Set the color on the gui,
-				setColor(row, col, Color.WHITE);			
-			else if (mode == 1)
-				setColor(row, col, Color.BLACK);	
-			board.setCell(row, col, mode);				// and set the cell in the game's board.
-		}
-		else if (isLarge) {
+		if (isSmall)
+			setSingleCell(row, col);
+		else if (isLarge)
 			for (int i = -1; i <= 1; i++)
 				for (int j = -1; j <=1; j++)
 					if ((row+i) >= 0 && (row+i) <= (button_row-1) 
-							&& (col+j) >= 0 && (col+j) <= (button_col-1)) {
-						if (mode == 0)								// Set the color on the gui,
-							setColor(row+i, col+j, Color.WHITE);			
-						else if (mode == 1)
-							setColor(row+i, col+j, Color.BLACK);	
-						board.setCell(row+i, col+j, mode);			// and set the cell in the game's board.
-					}
-						
+							&& (col+j) >= 0 && (col+j) <= (button_col-1))
+						setSingleCell(row+i, col+j);
+	}
+	
+	private void setSingleCell(int row, int col) {
+		if (currentButton.equals("wall")) {
+			if (isSmall && getCell(row, col).equals("wall"))// Clear wall.
+				clearCell(row,col);
+			else {								// Set Wall.
+				setColor(row, col, Color.BLACK);
+				board.setCell(row, col, getType("wall"));
+			}
+		}
+		else if (currentButton.equals("player")) {			// Set player.
+			if (isSmall && getCell(row, col).equals("player"))
+				clearCell(row,col);
+			else {
+				setColor(row, col, Color.GREEN);
+				board.setCell(row, col, getType("player"));
+			}
+		}
+		else if (currentButton.equals("monster")) {			// Set monster.
+			if (isSmall && getCell(row, col).equals("monster"))
+				clearCell(row,col);
+			else {
+				setColor(row, col, Color.MAGENTA);
+				board.setCell(row, col, getType("monster"));
+			}
 		}
 	}
+	
+	private void clearCell(int row, int col) {
+		setColor(row, col, Color.WHITE);
+		board.setCell(row, col, getType("clear"));
+	}
 
+	private String getCell(int row, int col) {
+		int mode = board.getCell(row, col);
+		if (mode == 0)
+			return "clear";
+		else if (mode == 1)
+			return "wall";
+		else if (mode == 2)
+			return "player";
+		else if (mode == 3)
+			return "monster";
+		else
+			return "";
+	}
+	
+	private int getType(String type) {
+		if (type.equals("clear"))
+			return 0;
+		else if (type.equals("wall"))
+			return 1;
+		else if (type.equals("player"))
+			return 2;
+		else if (type.equals("monster"))
+			return 3;
+		else
+			return -1;
+	}
+	
 	// Sets all of the buttons to white.
 	public void resetBoardGUI() {
 		for (int row = 0; row < button_row; row++)
 			for (int col = 0; col < button_col; col++)
-				buttons[row][col].setBackground(Color.WHITE);
+				clearCell(row, col);
 	}
 		
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		JButton button = (JButton) e.getComponent();	// Get the button in the grid that was clicked.
-		setCell(button.getActionCommand());				// Switch the cell from white<->black.
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		isMouseDown = true;
+		JButton button = (JButton) e.getComponent();
+		setCell(button.getActionCommand());
 	}
 
 	@Override
@@ -223,18 +279,15 @@ public class GameGUI implements ActionListener, MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		if (isMouseDown) {
 			JButton button = (JButton) e.getComponent();
-			setCell(button.getActionCommand(), 1);
+			setCell(button.getActionCommand());
 		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		if (isMouseDown) {
-			JButton button = (JButton) e.getComponent();
-			setCell(button.getActionCommand(), 1);
-		}
 	}
 
+	// Actions for the buttons on the right panel.
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();
@@ -250,5 +303,7 @@ public class GameGUI implements ActionListener, MouseListener {
 			isSmall = false;
 			isLarge = true;
 		}
+		else
+			currentButton = command;
 	}
 }
