@@ -1,5 +1,22 @@
 TODO:
 
-GUI:
+ <<GUI>>
 
-add board functions to gui
+ - Add board functions to gui
+
+ <<Players>>
+
+ - Create patterns and test draw on board
+
+ <<Monsters>>
+
+ - Create patterns and test draw on board
+
+ <<Weapons>>
+
+ - Create sprites and implement a Sprite class
+ - Create hitboxes and hit collision properties
+
+
+
+

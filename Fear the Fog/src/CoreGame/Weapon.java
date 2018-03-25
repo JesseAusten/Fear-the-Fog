@@ -5,13 +5,16 @@ public class Weapon {
 	private String name;
 	private int damage;
 	private int reach;
+	Tile[] tileSet;
 	
-	public Weapon(String name, int damage, int reach) {
-		this.name = name;
-		this.damage = damage;
-		this.reach = reach;
+	public Weapon(int row, int col) {
+		
+		
+		
 	}
 	
+	
+
 	public String getName() {
 		return name;
 	}
